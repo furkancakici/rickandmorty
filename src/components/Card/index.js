@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Card = ({ name, status, gender, species, image, origin }) => {
+const Card = ({ name, status, gender, species, image, origin, type }) => {
    return (
       <div className='card w-96 bg-base-100 shadow-xl'>
          <figure>
@@ -11,7 +11,7 @@ const Card = ({ name, status, gender, species, image, origin }) => {
             <p>Gender: {gender}</p>
             <p>Species: {species}</p>
             <p>Origin: {origin.name}</p>
-            <p>Type: {origin.type}</p>
+            {type && <p>Type: {type}</p>}
             <div className='card-actions justify-end'>
                <div
                   className={`badge ${

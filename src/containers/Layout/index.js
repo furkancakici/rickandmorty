@@ -1,31 +1,32 @@
 import Navbar from './navbar';
 import Footer from './footer';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setCharacters } from 'src/store/slices/charactersSlice';
 import { setLocations } from 'src/store/slices/locationsSlice';
 import { useEffect } from 'react';
+import { setTheme } from 'src/store/slices/themeSlice';
 
 const Layout = ({ children }) => {
-   const dispatch = useDispatch();
-   const fetchDatas = async () => {
-      let locationsData = await fetch(
-         'https://rickandmortyapi.com/api/location'
-      );
-      locationsData = await locationsData.json();
-      locationsData = locationsData.results;
+   const theme = useSelector((state) => state.theme);
 
-      let charactersData = await fetch(
-         'https://rickandmortyapi.com/api/character'
-      );
-      charactersData = await charactersData.json();
-      charactersData = charactersData.results;
-      dispatch(setCharacters(charactersData));
-      dispatch(setLocations(locationsData));
-   };
+   const dispatch = useDispatch();
 
    useEffect(() => {
-      fetchDatas();
+      let theme = localStorage.getItem('rickmorty-theme');
+
+      if (!theme) {
+         theme = process.env.NEXT_PUBLIC_DEFAULT_THEME;
+      }
+
+      dispatch(setTheme(theme));
    }, []);
+
+   useEffect(() => {
+      const htmlElement = document.documentElement;
+      htmlElement.setAttribute('data-theme', theme);
+      localStorage.setItem('rickmorty-theme', theme);
+      console.log(localStorage.getItem('rickmorty-theme'));
+   }, [theme]);
 
    return (
       <div className='min-h-screen !w-screen '>

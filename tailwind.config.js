@@ -1,4 +1,5 @@
 module.exports = {
+   darkMode: 'class',
    content: [
       './src/pages/**/*.{js,ts,jsx,tsx}',
       './src/components/**/*.{js,ts,jsx,tsx}',
@@ -8,7 +9,7 @@ module.exports = {
       extend: {},
    },
    daisyui: {
-      themes: ['forest'],
+      themes: ['garden', 'forest'],
    },
    plugins: [
       require('daisyui'),

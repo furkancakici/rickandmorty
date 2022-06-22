@@ -1,42 +1,73 @@
 // Count Alive, Dead, Robots, Ailens, Humans
 
-import { useSelector } from 'react-redux';
+import { useEffect, useState } from 'react';
 
-const Status = () => {
-   const characters = useSelector((state) => state.characters);
+const Status = ({ characters }) => {
+   const [counts, setCounts] = useState({
+      species: {},
+      status: {},
+   });
+   useEffect(() => {
+      let species = new Set();
+      let status = new Set();
+      if (characters && characters.length > 0 && characters instanceof Array) {
+         characters.forEach((character) => {
+            species.add(character.species);
+            status.add(character.status);
+         });
 
-   const countAlive = characters.filter(
-      (character) => character.status === 'Alive'
-   ).length;
-   const countDead = characters.filter(
-      (character) => character.status === 'Dead'
-   ).length;
-   const countUnknown = characters.filter(
-      (character) => character.status === 'unknown'
-   ).length;
-   const countAliens = characters.filter(
-      (character) => character.species === 'Alien'
-   ).length;
+         species = Array.from(species);
+         status = Array.from(status);
+         const countObject = { species: {}, status: {} };
 
-   const countHumans = characters.filter(
-      (character) => character.species === 'Human'
-   ).length;
+         species.forEach((kind) => {
+            const kindCount = characters.filter(
+               (c) => c.species === kind
+            ).length;
+            countObject.species[kind] = kindCount;
+         });
+
+         status.forEach((stat) => {
+            const statCount = characters.filter(
+               (c) => c.status === stat
+            ).length;
+            countObject.status[stat] = statCount;
+         });
+         setCounts(countObject);
+      }
+   }, [characters]);
 
    return (
-      <div className='stats shadow mb-10 !font-bold'>
-         <div className='stat place-items-center text-green-500'>
-            <div className='stat-title'>Alive</div>
-            <div className='stat-value '>{countAlive}</div>
+      <div className=' shadow mb-10 !font-bold flex flex-col w-full'>
+         <div className='flex flex-wrap w-full'>
+            {Object.keys(counts.status).map((stat) =>
+               counts.status[stat] ? (
+                  <div
+                     key={stat}
+                     className='stat w-max place-items-center text-green-500'
+                  >
+                     <div className='stat-title'>{stat}</div>
+                     <div className='stat-value '>{counts.status[stat]}</div>
+                  </div>
+               ) : (
+                  ''
+               )
+            )}
          </div>
-
-         <div className='stat place-items-center text-red-400'>
-            <div className='stat-title'>Dead</div>
-            <div className='stat-value '>{countDead}</div>
-         </div>
-
-         <div className='stat place-items-center text-yellow-400'>
-            <div className='stat-title'>Unknown</div>
-            <div className='stat-value '>{countUnknown}</div>
+         <div className='flex flex-wrap w-full'>
+            {Object.keys(counts.species).map((kind) =>
+               counts.species[kind] ? (
+                  <div
+                     key={kind}
+                     className='stat w-max place-items-center text-orange-500'
+                  >
+                     <div className='stat-title'>{kind}</div>
+                     <div className='stat-value '>{counts.species[kind]}</div>
+                  </div>
+               ) : (
+                  ''
+               )
+            )}
          </div>
       </div>
    );

@@ -3,9 +3,7 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 
 export default function Home({ data }) {
-   useEffect(() => {
-      console.log(data);
-   }, []);
+   
    return (
       <div>
          <Head>
