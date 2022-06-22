@@ -7,5 +7,12 @@ module.exports = {
    theme: {
       extend: {},
    },
-   plugins: [require('daisyui')],
+   daisyui: {
+      themes: ['forest'],
+   },
+   plugins: [
+      require('daisyui'),
+      require('tailwindcss-important'),
+      require('tailwindcss-children'),
+   ],
 };

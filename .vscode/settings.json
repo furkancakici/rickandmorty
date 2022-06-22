@@ -1,0 +1,6 @@
+{
+    "files.exclude": {
+        "src/pages/resident.js": false
+    },
+    "workspace.isHidden": false
+}

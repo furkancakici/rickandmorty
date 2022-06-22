@@ -9,10 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@reduxjs/toolkit": "^1.8.2",
     "daisyui": "^2.15.4",
     "next": "12.1.6",
     "react": "18.2.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "react-redux": "^8.0.2",
+    "redux-thunk": "^2.4.1",
+    "tailwindcss-children": "^2.1.0",
+    "tailwindcss-important": "^1.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^10.4.7",
