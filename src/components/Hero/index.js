@@ -20,7 +20,7 @@ const Hero = () => {
                   Swim için yaratılan bir yetişkin animasyon televizyon
                   dizisidir. Dizi, kendi zamanlarını aile hayatı ve boyutlar
                   arası yolculuk arasında bölüştürmüş alkolik bilim insanı Rick
-                  ve onun torunu Morty'nin maceralarını anlatır.
+                  ve onun torunu Morty{`'`}nin maceralarını anlatır.
                </p>
                <Link href='/location'>
                   <a className='btn btn-primary'>Keşfet</a>
